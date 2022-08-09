@@ -3,7 +3,7 @@ main = "./src/server.js"
 type = "javascript"
 compatibility_date="2022-02-26"
 
-account_id = "c21e5aacc2d33c52c2b6589adbe56dc0"
+account_id = "80ef5bae8074964d94d83883f21f08ce"
 workers_dev = true
 
 [[rules]]
