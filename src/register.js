@@ -47,6 +47,11 @@ async function registerGuildCommands() {
   });
 }
 
+async function unregisterGuildCommands() {
+  const url = `https://discord.com/api/v10/applications/${applicationId}/guilds/${testGuildId}/commands`;
+  const res = await unregisterCommands(url);
+}
+
 /**
  * Register all commands globally.  This can take o(minutes), so wait until
  * you're sure these are the commands you want.
@@ -77,5 +82,27 @@ async function registerCommands(url) {
   return response;
 }
 
+async function unregisterCommands(url) {
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bot ${token}`,
+    },
+    method: 'PUT',
+    body: JSON.stringify([]),
+  });
+
+  if (response.ok) {
+    console.log('Unregistered all commands');
+  } else {
+    console.error('Error unregistering commands');
+    const text = await response.text();
+    console.error(text);
+  }
+  return response;
+}
+
 await registerGlobalCommands();
 // await registerGuildCommands();
+
+await unregisterGuildCommands();
